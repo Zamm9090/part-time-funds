@@ -15,7 +15,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Orders orderRequest={this.state.orderRequest} fundName={this.state.fundName} />
+        {
+          this.state.orderRequest.enterOrders.orderResponses.map((item, index)=>{
+            return <Orders orderRequest={item} fundName={this.state.fundName} key={index} />
+          })
+          
+        }
       </div>
     );
   }

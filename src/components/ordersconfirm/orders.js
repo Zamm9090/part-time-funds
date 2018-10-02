@@ -3,17 +3,17 @@ import PropTypes from 'prop-types'
 import cx from 'classnames'
 import s from './Order.scss'
 
-const fetchFundAccountFormFields = (props) =>{
-    console.log('fetchFundAccountFormFields ~~~~~~~~ ', props.orderRequest);
+const fetchFundAccountFormFields = (orderRequest) =>{
+    console.log('fetchFundAccountFormFields ~~~~~~~~ ', orderRequest);
     let formFields = [];
-    formFields.push({label:'Account', labelClass:[s.labelField, s.accountInfo], val:props.orderRequest.fundAccount.account.name, valClass:[], skipUndefined:false})
-    formFields.push({label:'Market Value', labelClass:[s.labelField], val:props.orderRequest.fundAccount.balance.balanceAmt, valClass:[], skipUndefined:false})
-    formFields.push({label:'Total Share', labelClass:[s.labelField], val:props.orderRequest.fundAccount.balance.shares, valClass:[], skipUndefined:false})
-    formFields.push({label:'Est. Market Value', labelClass:[s.labelField], val:props.orderRequest.fundAccount.balance.balanceAmt, valClass:[], skipUndefined:false})
-    formFields.push({label:'Est. Share', labelClass:[s.labelField], val:props.orderRequest.fundAccount.estimatedShare, valClass:[], skipUndefined:true})
-    formFields.push({label:'Fund % Owned', labelClass:[s.labelField], val:props.orderRequest.fundAccount.fundPercentOwned, valClass:[], skipUndefined:true})
-    formFields.push({label:'Est. Total Market Value', labelClass:[s.labelField], val:props.orderRequest.fundAccount.estimatedTotalMarketValue, valClass:[], skipUndefined:true})
-    formFields.push({label:'Est. Total Share', labelClass:[s.labelField], val:props.orderRequest.fundAccount.estimatedTotalShare, valClass:[], skipUndefined:true})
+    formFields.push({label:'Account', labelClass:[s.accountInfo], val:orderRequest.fundAccount.account.name, valClass:[], skipUndefined:false})
+    formFields.push({label:'Market Value', labelClass:[], val:orderRequest.fundAccount.balance.balanceAmt, valClass:[], skipUndefined:false})
+    formFields.push({label:'Total Share', labelClass:[], val:orderRequest.fundAccount.balance.shares, valClass:[], skipUndefined:false})
+    formFields.push({label:'Est. Market Value', labelClass:[], val:orderRequest.fundAccount.balance.balanceAmt, valClass:[], skipUndefined:false})
+    formFields.push({label:'Est. Share', labelClass:[], val:orderRequest.fundAccount.estimatedShare, valClass:[], skipUndefined:true})
+    formFields.push({label:'Fund % Owned', labelClass:[], val:orderRequest.fundAccount.fundPercentOwned, valClass:[], skipUndefined:true})
+    formFields.push({label:'Est. Total Market Value', labelClass:[], val:orderRequest.fundAccount.estimatedTotalMarketValue, valClass:[], skipUndefined:true})
+    formFields.push({label:'Est. Total Share', labelClass:[], val:orderRequest.fundAccount.estimatedTotalShare, valClass:[], skipUndefined:true})
     return formFields;
 }
 
@@ -30,6 +30,7 @@ const setRowDivTagByGeneralEntity=(entity, index)=>{
 }
 
 const Orders = (props) => {
+    const {orderRequest} = props;
     return(
         <div className={s.confirmOrderWrap}>
             <div className={cx(s.row)}>
@@ -37,7 +38,7 @@ const Orders = (props) => {
             </div>
             <div className={cx(s.row)}>
                 {
-                    fetchFundAccountFormFields(props).map((item, index)=>{
+                    fetchFundAccountFormFields(orderRequest).map((item, index)=>{
                         return setRowDivTagByGeneralEntity(item, index)
                     })
                 }
